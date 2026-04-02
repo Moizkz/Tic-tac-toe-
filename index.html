@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+    background-color: black;
+    color: white;
+}
+h1{
+    text-align: center;
+    color: white;
+}
+h4{
+    display: inline;
+}
+.btn{
+    height: 50px;
+    width: 50px;
+    background-color: black;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+}
+.box{
+    display: flex;
+    height: 150px;
+    width: 158px;
+    flex-wrap: wrap;
+    margin-left: 42%;
+    margin-top: 10%;
+    transform: scale(1.5);
+}
+#win{
+   text-align: center;
+    color: yellow;
+}
+.hide{
+    display: none;
+}
+#btn1{ border-top-color: transparent;}
+#btn2{ border-top-color: transparent; border-right-color: transparent;}
+#btn0{ border-top-color: transparent; border-left-color: transparent;}
+#btn3{ border-left-color: transparent;}
+#btn5{ border-right-color: transparent;}
+#btn6{ border-bottom-color: transparent; border-left-color: transparent;}
+#btn7{ border-bottom-color: transparent;}
+#btn8{ border-bottom-color: transparent; border-right-color: transparent;}
+#New{
+    BACKGROUND: BLUE;
+    COLOR: WHITE;
+    HEIGHT: 30PX;
+    FONT-WEIGHT: 600;
+    FLOAT: LEFT;
+    TOP: 60PX;
+    LEFT: 145PX;
+    POSITION: RELATIVE;
+}
+#reset{
+    BACKGROUND: white;
+    COLOR: black;
+    HEIGHT: 30PX;
+    FONT-WEIGHT: 600;
+    FLOAT: right;
+    TOP: 60PX;
+    right: 145PX;
+    POSITION: RELATIVE;
+}
+#New:hover{
+    background-color: black;
+    border: 1px solid white;
+    transition: 1s;
+}
+#reset:hover{
+    background-color: black;
+    border: 1px solid white;
+    transition: 1s;
+    color: white;
+}
+.heading{
+    display: flex;
+    justify-content: space-around;
+}
+@media (max-width:600px){
+    .box{
+    margin-left: 30%;
+    margin-top: 60%;
+    }
+    #New{
+    BACKGROUND: BLUE;
+    COLOR: WHITE;
+    HEIGHT: 30PX;
+    FONT-WEIGHT: 600;
+    FLOAT: LEFT;
+    TOP: 60PX;
+    LEFT: 45PX;
+    POSITION: RELATIVE;
+}
+#reset{
+    BACKGROUND: white;
+    COLOR: black;
+    HEIGHT: 30PX;
+    FONT-WEIGHT: 600;
+    FLOAT: right;
+    TOP: 60PX;
+    right: 45PX;
+    POSITION: RELATIVE;
+}
+}
+    </style>
+</head>
+<body>
+    <h1>Tic Tac Toe</h1>
+    <h2 id="win" class="hide">Winner is</h2>
+    <div class="heading">
+    <h4 id="p1">Player 1 = </h4>
+    <h4 id="p2">Player 2 = </h4>
+    </div>
+    <button id="New">New Game</button>
+    <button id="reset">Reset</button>
+    <div class="box">
+    <button class="btn" id="btn0"></button>
+    <button class="btn" id="btn1"></button>
+    <button class="btn" id="btn2"></button>
+    <br>
+    <button class="btn" id="btn3"></button>
+    <button class="btn" id="btn4"></button>
+    <button class="btn" id="btn5"></button>
+    <br>
+    <button class="btn" id="btn6"></button>
+    <button class="btn" id="btn7"></button>
+    <button class="btn" id="btn8"></button>
+    </div>
+<script>
+    // let btn0 = document.querySelector("#btn0");
+// let btn1 = document.querySelector("#btn1");
+// let btn2 = document.querySelector("#btn2");
+// let btn3 = document.querySelector("#btn3");
+// let btn4 = document.querySelector("#btn4");
+// let btn5 = document.querySelector("#btn5");
+// let btn6 = document.querySelector("#btn6");
+// let btn7 = document.querySelector("#btn7");
+// let btn8 = document.querySelector("#btn8");
+
+// btn0.onclick = () => {btn0.innerText = "X";} 
+// btn1.onclick = () => {btn1.innerText = "X";} 
+// btn2.onclick = () => {btn2.innerText = "X";} 
+// btn3.onclick = () => {btn3.innerText = "X";} 
+// btn4.onclick = () => {btn4.innerText = "X";} 
+// btn5.onclick = () => {btn5.innerText = "X";} 
+// btn6.onclick = () => {btn6.innerText = "X";} 
+// btn7.onclick = () => {btn7.innerText = "X";} 
+// btn8.onclick = () => {btn8.innerText = "X";} 
+let p1 = prompt("Enter 1st name");
+let p2 = prompt("Enter 2nd name");
+document.getElementById("p1").innerText += p2;
+document.getElementById("p2").innerText += p1;
+let player = p1;
+let btn = document.querySelectorAll(".btn");
+let win = document.getElementById("win");
+let newbtn = document.getElementById("New");
+let resetbtn = document.getElementById("reset");
+// btn.addEventListener = ("onclick", () =>{
+//     if(player==="p1"){
+//         console.log("p1 was clicked");
+//         player = "p2";
+//     }
+//     else{
+//         console.log("p2 was clicked");
+//         player = "p1";
+//     }
+// })
+btn.forEach((btn) =>{
+    btn.addEventListener("click", () =>{
+       if(player==p1){
+        console.log(p1+" was clicked");
+        player = p2;
+        btn.innerText = "X"
+    }
+    else{
+        console.log(p2+" was clicked");
+        player = p1;
+        btn.innerText = "O"
+    }
+    btn.disabled = true;
+    checkWinner();
+    console.log(player+" is winner")
+    })
+})
+const showWinner = (winner) => {
+win.innerHTML += (" "+winner);
+win.classList.remove("hide");
+}
+
+let patterns = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+]
+const reset = () =>{
+    for(let bt of btn){
+    bt.disabled = false;
+    bt.innerText = "";
+    }
+    win.classList.add("hide");
+}
+const checkWinner = () => {
+for(let pat of patterns){
+    console.log(btn[pat[0]].innerText, btn[pat[1]].innerText, btn[pat[2]].innerText);
+    console.log(pat[0], pat[1], pat[2]);
+    let pos1 = btn[pat[0]].innerText;
+    let pos2 = btn[pat[1]].innerText;
+    let pos3 = btn[pat[2]].innerText;
+    if(pos1 != "" && pos2 != "" && pos3 != ""){
+        if(pos1 == pos2 && pos2 == pos3){
+            console.log("winner");
+            pos1 = player;
+            showWinner(pos1);
+            for(let bt of btn){
+                bt.disabled = true;
+            }
+        }
+    }
+}}
+// btn.innerText = "x"
+
+newbtn.addEventListener("click", reset);
+resetbtn.addEventListener("click", reset);
+</script>
+</body>
+</html>
